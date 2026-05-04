@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Володимир & Аліна · 1 серпня 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1e3d30;
+    --green-light: #3d6b59;
+    --green-pale: #a8c5a8;
+    --white: #ffffff;
+    --off-white: #f6f8f5;
+    --wood: #a07840;
+    --brown: #5a3e28;
+    --text: #1a1a1a;
+    --text-mid: #3d3228;
+    --gold: #b8924a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; background:var(--white); color:var(--text); overflow-x:hidden; font-size:16px; }
+
+  /* ── LANG BAR ── */
+  .lang-bar {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:flex-end; padding:12px 28px;
+    background:rgba(255,255,255,0.93); backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(160,120,64,0.15);
+  }
+  .lang-btn {
+    background:none; border:1px solid var(--wood); color:var(--brown);
+    font-family:'Jost',sans-serif; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; padding:5px 16px; cursor:pointer;
+    border-radius:20px; margin-left:8px; transition:all .3s; font-weight:400;
+  }
+  .lang-btn.active { background:var(--green); border-color:var(--green); color:white; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    position:relative; overflow:hidden; padding:100px 24px 70px;
+    background:var(--white);
+  }
+  .hero-bot-left {
+    position:absolute; left:-10px; bottom:-10px; width:400px;
+    opacity:0.2; pointer-events:none;
+  }
+  .hero-bot-right {
+    position:absolute; right:-10px; top:60px; width:360px;
+    opacity:0.17; pointer-events:none; transform:scaleX(-1);
+  }
+  .hero-eyebrow {
+    font-family:'Jost',sans-serif; font-size:12px; letter-spacing:5px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:28px;
+    opacity:0; animation:fadeUp .8s .3s forwards; position:relative; z-index:1;
+  }
+  .hero-names {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(58px,11vw,108px);
+    font-weight:300; line-height:1; color:var(--green); letter-spacing:-1px;
+    opacity:0; animation:fadeUp .8s .5s forwards; position:relative; z-index:1;
+  }
+  .hero-names em { font-style:italic; color:var(--wood); }
+  .hero-amp {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:0.65em; color:var(--gold); display:block; line-height:1.3;
+  }
+  .hero-divider {
+    width:80px; height:1px;
+    background:linear-gradient(to right, transparent, var(--gold), transparent);
+    margin:32px auto; opacity:0; animation:fadeUp .8s .7s forwards;
+    position:relative; z-index:1;
+  }
+  .hero-date {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(20px,3vw,30px);
+    font-weight:400; letter-spacing:4px; color:var(--text-mid);
+    opacity:0; animation:fadeUp .8s .9s forwards; position:relative; z-index:1;
+  }
+  .hero-place {
+    font-size:14px; font-weight:400; letter-spacing:2.5px; color:var(--green-light);
+    margin-top:12px; text-transform:uppercase; opacity:0;
+    animation:fadeUp .8s 1.1s forwards; position:relative; z-index:1;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown {
+    display:flex; gap:28px; margin-top:52px;
+    opacity:0; animation:fadeUp .8s 1.3s forwards; position:relative; z-index:1;
+  }
+  .count-unit { text-align:center; min-width:68px; }
+  .count-num {
+    font-family:'Cormorant Garamond',serif; font-size:50px; font-weight:400;
+    color:var(--green); line-height:1; display:block;
+  }
+  .count-label {
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--gold); margin-top:6px; display:block; font-weight:400;
+  }
+  .count-sep {
+    font-family:'Cormorant Garamond',serif; font-size:42px; color:var(--gold);
+    line-height:1.1; align-self:flex-start; padding-top:8px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding:100px 24px; position:relative; overflow:hidden; }
+  .section-inner { max-width:780px; margin:0 auto; position:relative; z-index:1; }
+  .bg-light { background:var(--off-white); }
+  .bg-white { background:var(--white); }
+
+  .section-tag {
+    font-size:11px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--gold); display:block; margin-bottom:16px;
+    text-align:center; font-weight:400;
+  }
+  .section-title {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(34px,5vw,56px);
+    font-weight:300; color:var(--green); text-align:center;
+    line-height:1.2; margin-bottom:16px;
+  }
+  .section-title em { font-style:italic; color:var(--wood); }
+  .leaf-divider {
+    text-align:center; color:var(--green-pale); font-size:18px;
+    margin:12px 0 40px; letter-spacing:10px;
+  }
+
+  /* botanical side accents */
+  .leaf-l {
+    position:absolute; left:-50px; top:50%; transform:translateY(-50%);
+    width:260px; opacity:0.11; pointer-events:none;
+  }
+  .leaf-r {
+    position:absolute; right:-50px; top:30%;
+    width:240px; opacity:0.09; pointer-events:none; transform:scaleX(-1);
+  }
+  .leaf-br {
+    position:absolute; bottom:-30px; right:4%;
+    width:300px; opacity:0.09; pointer-events:none;
+  }
+  .leaf-tl {
+    position:absolute; top:-10px; left:0;
+    width:220px; opacity:0.09; pointer-events:none;
+  }
+
+  /* ── WELCOME ── */
+  .welcome-text {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.4vw,22px);
+    font-weight:400; line-height:1.9; color:var(--text);
+    text-align:center; max-width:640px; margin:0 auto 44px;
+  }
+  .quote-block {
+    border-left:2px solid var(--gold); padding:22px 30px;
+    margin:0 auto; max-width:540px; background:rgba(184,146,74,0.04);
+  }
+  .quote-block p {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:clamp(18px,2.5vw,23px); font-weight:300;
+    color:var(--green); line-height:1.7;
+  }
+  .quote-block cite {
+    display:block; margin-top:12px; font-size:12px; letter-spacing:2px;
+    color:var(--gold); font-style:normal; text-transform:uppercase; font-weight:400;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position:relative; padding-left:40px;
+    max-width:560px; margin:0 auto;
+  }
+  .timeline::before {
+    content:''; position:absolute; left:8px; top:8px; bottom:8px; width:1px;
+    background:linear-gradient(to bottom, transparent, var(--gold) 15%, var(--green-pale) 85%, transparent);
+  }
+  .tl-item { position:relative; margin-bottom:42px; }
+  .tl-item::before {
+    content:''; position:absolute; left:-34px; top:7px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--gold); border:2px solid white; box-shadow:0 0 0 2px var(--gold);
+  }
+  .tl-time {
+    font-size:12px; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--gold); display:block; margin-bottom:5px; font-weight:500;
+  }
+  .tl-title {
+    font-family:'Cormorant Garamond',serif; font-size:23px;
+    font-weight:500; color:var(--green); margin-bottom:5px;
+  }
+  .tl-desc { font-size:15px; color:var(--text-mid); line-height:1.65; font-weight:300; }
+
+  /* ── DRESSCODE ── */
+  .dresscode-text {
+    text-align:center; font-family:'Cormorant Garamond',serif;
+    font-size:clamp(17px,2.2vw,21px); font-weight:400; color:var(--text);
+    line-height:1.85; max-width:600px; margin:0 auto 20px;
+  }
+  .dresscode-note {
+    text-align:center; font-size:15px; font-weight:400; color:#8b3030;
+    background:rgba(139,48,48,0.06); border:1px solid rgba(139,48,48,0.18);
+    border-radius:4px; padding:14px 28px; max-width:520px;
+    margin:0 auto 44px; letter-spacing:0.3px; line-height:1.6;
+  }
+  .palette { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:8px; }
+  .swatch { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .swatch-circle {
+    width:60px; height:60px; border-radius:50%;
+    border:2px solid rgba(255,255,255,0.8); box-shadow:0 2px 14px rgba(0,0,0,0.13);
+  }
+  .swatch-name {
+    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--text-mid); text-align:center; font-weight:400;
+  }
+
+  /* ── MAP ── */
+  .map-address { text-align:center; margin-bottom:28px; }
+  .map-address strong {
+    font-family:'Cormorant Garamond',serif; font-size:26px;
+    font-weight:500; color:var(--green); display:block; margin-bottom:8px;
+  }
+  .map-address span { font-size:14px; color:var(--text-mid); letter-spacing:1px; }
+  .map-frame {
+    width:100%; height:380px; border-radius:4px; overflow:hidden;
+    border:1px solid rgba(160,120,64,0.25);
+  }
+  .map-frame iframe { width:100%; height:100%; border:0; }
+
+  /* ── RSVP ── */
+  .rsvp-form { max-width:580px; margin:0 auto; display:flex; flex-direction:column; gap:22px; }
+  .form-row { display:flex; gap:16px; }
+  .form-row .form-group { flex:1; }
+  .form-group { display:flex; flex-direction:column; gap:8px; }
+  .form-group label {
+    font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--green-light); font-weight:500;
+  }
+  .form-group input,
+  .form-group textarea {
+    background:white; border:1px solid rgba(160,120,64,0.3);
+    border-radius:3px; padding:13px 18px; font-family:'Jost',sans-serif;
+    font-size:15px; color:var(--text); font-weight:300;
+    transition:border-color .3s, box-shadow .3s; outline:none; width:100%;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color:var(--green-light); box-shadow:0 0 0 3px rgba(61,107,89,0.1);
+  }
+  .form-group textarea { resize:vertical; min-height:110px; }
+
+  .attend-options { display:flex; gap:10px; flex-wrap:wrap; }
+  .attend-btn {
+    flex:1; min-width:130px; padding:13px 10px;
+    border:1px solid rgba(160,120,64,0.35); background:white;
+    border-radius:3px; cursor:pointer; font-family:'Jost',sans-serif;
+    font-size:13px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--text-mid); transition:all .3s; font-weight:400;
+  }
+  .attend-btn.selected { background:var(--green); border-color:var(--green); color:white; }
+
+  .alcohol-options { display:flex; flex-wrap:wrap; gap:10px; }
+  .alc-chip {
+    padding:9px 18px; border:1px solid rgba(160,120,64,0.35);
+    border-radius:22px; background:white; cursor:pointer;
+    font-size:14px; color:var(--text-mid); font-weight:300;
+    transition:all .3s; user-select:none;
+  }
+  .alc-chip.selected { background:var(--green); border-color:var(--green); color:white; }
+
+  .submit-btn {
+    background:var(--green); color:white; border:none; padding:18px 52px;
+    font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic;
+    cursor:pointer; letter-spacing:1px; border-radius:3px;
+    transition:background .3s, transform .2s; align-self:center;
+    margin-top:10px; min-width:220px; font-weight:400;
+  }
+  .submit-btn:hover { background:var(--brown); transform:translateY(-2px); }
+
+  .form-status {
+    text-align:center; padding:18px; border-radius:4px;
+    font-family:'Cormorant Garamond',serif; font-size:20px;
+    font-style:italic; display:none;
+  }
+  .form-status.success { background:rgba(30,61,48,0.07); color:var(--green); border:1px solid rgba(30,61,48,0.18); display:block; }
+  .form-status.error { background:rgba(139,48,48,0.07); color:#8b3030; border:1px solid rgba(139,48,48,0.2); display:block; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding:56px 24px; text-align:center;
+    background:var(--green); color:rgba(255,255,255,0.7);
+    position:relative; overflow:hidden;
+  }
+  .footer-bot-l {
+    position:absolute; bottom:-20px; left:-30px;
+    width:320px; opacity:0.12; pointer-events:none;
+  }
+  .footer-bot-r {
+    position:absolute; top:-20px; right:-30px;
+    width:280px; opacity:0.10; pointer-events:none; transform:scaleX(-1) rotate(180deg);
+  }
+  footer .footer-names {
+    font-family:'Cormorant Garamond',serif; font-size:44px;
+    font-weight:300; font-style:italic; color:white;
+    display:block; margin-bottom:12px; position:relative; z-index:1;
+  }
+  footer p { font-size:13px; letter-spacing:2px; text-transform:uppercase; position:relative; z-index:1; }
+
+  /* ── CALENDAR ── */
+  .mini-cal {
+    background: white;
+    border: 1px solid rgba(160,120,64,0.2);
+    border-radius: 6px;
+    padding: 18px 22px;
+    box-shadow: 0 4px 24px rgba(30,61,48,0.08);
+    width: 280px;
+  }
+  .cal-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--green); text-align: center; margin-bottom: 14px;
+  }
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 4px; text-align: center;
+  }
+  .cal-dow {
+    font-size: 10px; letter-spacing: 1px; color: var(--gold);
+    text-transform: uppercase; font-weight: 500; padding-bottom: 6px;
+  }
+  .cal-day {
+    font-size: 13px; color: var(--text-mid);
+    padding: 4px 2px; line-height: 1; font-weight: 300; position: relative;
+  }
+  .cal-day.empty { color: transparent; }
+  .cal-day.special {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 600; color: var(--green);
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .heart-svg { width: 28px; height: 26px; display: block; }
+  .heart-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 34px;
+  }
+  .heart-wrap svg { position: absolute; top: 0; left: 0; }
+  .heart-num {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #c0392b;
+    line-height: 1;
+    margin-top: 6px;
+  }
+
+  /* ── GIFTS ── */
+  .gifts-card {
+    background: white; border: 1px solid rgba(160,120,64,0.2);
+    border-radius: 4px; padding: 36px 40px; max-width: 600px;
+    margin: 0 auto; text-align: center;
+    box-shadow: 0 2px 20px rgba(30,61,48,0.06);
+  }
+  .gifts-icon { font-size: 40px; margin-bottom: 20px; display: block; }
+  .gifts-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px,2.2vw,21px); font-weight: 400;
+    color: var(--text); line-height: 1.85;
+  }
+  .gifts-note {
+    margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid rgba(160,120,64,0.2);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px,2vw,19px); font-weight: 300;
+    font-style: italic; color: var(--text-mid); line-height: 1.75;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .reveal { opacity:0; transform:translateY(32px); transition:opacity .85s ease, transform .85s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+  .reveal-delay-1 { transition-delay:.12s; }
+  .reveal-delay-2 { transition-delay:.24s; }
+  .reveal-delay-3 { transition-delay:.36s; }
+
+  @media (max-width:600px) {
+    .form-row { flex-direction:column; }
+    .countdown { gap:14px; }
+    .count-num { font-size:36px; }
+    section { padding:70px 20px; }
+    .hero-bot-left, .hero-bot-right { width:240px; }
+    .attend-btn { min-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('uk')" id="btn-uk">🇺🇦 UA</button>
+  <button class="lang-btn" onclick="setLang('pl')" id="btn-pl">🇵🇱 PL</button>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+
+  <!-- Left botanical branch -->
+  <svg class="hero-bot-left" viewBox="0 0 420 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M90 700 C65 615 25 565 50 468 C75 372 152 352 125 248 C98 144 32 124 58 44" stroke="#1e3d30" stroke-width="2.2" fill="none"/>
+    <ellipse cx="58" cy="172" rx="42" ry="24" transform="rotate(-34 58 172)" fill="#1e3d30" opacity="0.75"/>
+    <path d="M58 172 C36 163 20 150 17 132" stroke="#1e3d30" stroke-width="1.3" fill="none"/>
+    <ellipse cx="85" cy="294" rx="48" ry="28" transform="rotate(22 85 294)" fill="#1e3d30" opacity="0.68"/>
+    <path d="M85 294 C104 282 118 266 122 247" stroke="#1e3d30" stroke-width="1.3" fill="none"/>
+    <ellipse cx="52" cy="400" rx="38" ry="22" transform="rotate(-18 52 400)" fill="#1e3d30" opacity="0.65"/>
+    <ellipse cx="118" cy="504" rx="34" ry="19" transform="rotate(26 118 504)" fill="#1e3d30" opacity="0.55"/>
+    <ellipse cx="62" cy="588" rx="28" ry="16" transform="rotate(-12 62 588)" fill="#1e3d30" opacity="0.45"/>
+    <!-- flowers -->
+    <path d="M148 96 C164 68 156 34 174 10" stroke="#b8924a" stroke-width="1.3" fill="none"/>
+    <circle cx="144" cy="90" r="8" fill="#b8924a" opacity="0.65"/>
+    <circle cx="158" cy="62" r="6" fill="#b8924a" opacity="0.55"/>
+    <circle cx="168" cy="36" r="7" fill="#b8924a" opacity="0.48"/>
+    <circle cx="174" cy="12" r="5" fill="#b8924a" opacity="0.4"/>
+    <!-- extra small leaves -->
+    <ellipse cx="210" cy="620" rx="24" ry="14" transform="rotate(18 210 620)" fill="#1e3d30" opacity="0.35"/>
+    <ellipse cx="190" cy="570" rx="20" ry="12" transform="rotate(-14 190 570)" fill="#1e3d30" opacity="0.3"/>
+  </svg>
+
+  <!-- Right botanical branch -->
+  <svg class="hero-bot-right" viewBox="0 0 400 680" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M310 660 C338 575 378 525 352 428 C326 331 246 311 272 207 C298 103 362 83 336 12" stroke="#1e3d30" stroke-width="2.2" fill="none"/>
+    <ellipse cx="348" cy="154" rx="40" ry="23" transform="rotate(32 348 154)" fill="#1e3d30" opacity="0.7"/>
+    <ellipse cx="320" cy="278" rx="46" ry="26" transform="rotate(-24 320 278)" fill="#1e3d30" opacity="0.65"/>
+    <ellipse cx="352" cy="382" rx="36" ry="21" transform="rotate(18 352 382)" fill="#1e3d30" opacity="0.6"/>
+    <ellipse cx="284" cy="478" rx="40" ry="23" transform="rotate(-20 284 478)" fill="#1e3d30" opacity="0.5"/>
+    <ellipse cx="340" cy="566" rx="30" ry="17" transform="rotate(14 340 566)" fill="#1e3d30" opacity="0.4"/>
+    <!-- flowers -->
+    <path d="M256 84 C240 56 246 26 228 6" stroke="#b8924a" stroke-width="1.3" fill="none"/>
+    <circle cx="260" cy="78" r="7" fill="#b8924a" opacity="0.6"/>
+    <circle cx="248" cy="52" r="5" fill="#b8924a" opacity="0.5"/>
+    <circle cx="236" cy="26" r="6" fill="#b8924a" opacity="0.44"/>
+    <circle cx="228" cy="8" r="4" fill="#b8924a" opacity="0.36"/>
+  </svg>
+
+  <p class="hero-eyebrow" data-uk="Запрошуємо на наше весілля" data-pl="Zapraszamy na nasze wesele">Запрошуємо на наше весілля</p>
+
+  <h1 class="hero-names" id="hero-uk" style="position:relative;z-index:1;">
+    Володимир<span class="hero-amp">&</span><em>Аліна</em>
+  </h1>
+  <h1 class="hero-names" id="hero-pl" style="display:none;position:relative;z-index:1;">
+    Volodymyr<span class="hero-amp">&</span><em>Alina</em>
+  </h1>
+
+  <div class="hero-divider"></div>
+  <p class="hero-date" data-uk="1 серпня 2026" data-pl="1 sierpnia 2026">1 серпня 2026</p>
+  <p class="hero-place">Dworek Jeleński · Kędzierzyn</p>
+
+  <div class="countdown" id="countdown" style="margin-top:52px;">
+    <div class="count-unit">
+      <span class="count-num" id="cd-days">—</span>
+      <span class="count-label" data-uk="днів" data-pl="dni">днів</span>
+    </div>
+    <span class="count-sep">·</span>
+    <div class="count-unit">
+      <span class="count-num" id="cd-hours">—</span>
+      <span class="count-label" data-uk="годин" data-pl="godzin">годин</span>
+    </div>
+    <span class="count-sep">·</span>
+    <div class="count-unit">
+      <span class="count-num" id="cd-mins">—</span>
+      <span class="count-label" data-uk="хвилин" data-pl="minut">хвилин</span>
+    </div>
+    <span class="count-sep">·</span>
+    <div class="count-unit">
+      <span class="count-num" id="cd-secs">—</span>
+      <span class="count-label" data-uk="секунд" data-pl="sekund">секунд</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WELCOME ══════════ -->
+<section class="bg-light">
+  <svg class="leaf-l" viewBox="0 0 260 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 480 C40 410 15 370 35 290 C55 210 115 195 95 120 C75 45 25 30 45 5" stroke="#1e3d30" stroke-width="1.6" fill="none"/>
+    <ellipse cx="42" cy="130" rx="34" ry="20" transform="rotate(-28 42 130)" fill="#1e3d30"/>
+    <ellipse cx="65" cy="225" rx="40" ry="23" transform="rotate(20 65 225)" fill="#1e3d30"/>
+    <ellipse cx="38" cy="315" rx="30" ry="18" transform="rotate(-15 38 315)" fill="#1e3d30"/>
+    <ellipse cx="55" cy="408" rx="26" ry="15" transform="rotate(12 55 408)" fill="#1e3d30"/>
+  </svg>
+  <svg class="leaf-r" viewBox="0 0 240 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M55 420 C35 355 10 315 30 240 C50 165 110 150 90 80 C70 10 20 0 40 0" stroke="#1e3d30" stroke-width="1.6" fill="none"/>
+    <ellipse cx="40" cy="112" rx="32" ry="19" transform="rotate(25 40 112)" fill="#1e3d30"/>
+    <ellipse cx="60" cy="212" rx="38" ry="22" transform="rotate(-18 60 212)" fill="#1e3d30"/>
+    <ellipse cx="35" cy="295" rx="28" ry="17" transform="rotate(12 35 295)" fill="#1e3d30"/>
+  </svg>
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Вітання" data-pl="Powitanie">Вітання</span>
+    <h2 class="section-title reveal" data-uk="Від щирого <em>серця</em>" data-pl="Z całego <em>serca</em>">Від щирого <em>серця</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <p class="welcome-text reveal reveal-delay-1"
+      data-uk="Дорогі наші рідні та найближчі друзі,<br><br>ми хочемо розділити з вами найважливіший день нашого спільного життя — день, коли два серця назавжди переплітаються. Цього дня ми збираємось у колі тих, кого любимо, щоби разом відчути тепло й радість нового починання.<br><br>Ваша присутність — найкращий подарунок, який ви можете нам подарувати. Нехай цей день стане світлим спогадом для кожного з нас."
+      data-pl="Drodzy nasi bliscy i przyjaciele,<br><br>chcemy podzielić z Wami najważniejszy dzień naszego wspólnego życia — dzień, w którym dwa serca łączą się na zawsze. Tego dnia gromadzimy się w gronie tych, których kochamy.<br><br>Wasza obecność jest najpiękniejszym darem, jaki możecie nam oferować. Niech ten dzień stanie się jasnym wspomnieniem dla każdego z nas.">
+      Дорогі наші рідні та найближчі друзі,<br><br>ми хочемо розділити з вами найважливіший день нашого спільного життя — день, коли два серця назавжди переплітаються. Цього дня ми збираємось у колі тих, кого любимо, щоби разом відчути тепло й радість нового починання.<br><br>Ваша присутність — найкращий подарунок, який ви можете нам подарувати. Нехай цей день стане світлим спогадом для кожного з нас.
+    </p>
+    <div class="quote-block reveal reveal-delay-2">
+      <p data-uk="«Любов — це не те, що ми знаходимо. Це те, що ми будуємо разом, день за днем, крок за кроком.»"
+         data-pl="«Miłość to nie coś, co się odnajduje. To coś, co się buduje razem, dzień po dniu, krok po kroku.»">
+        «Любов — це не те, що ми знаходимо. Це те, що ми будуємо разом, день за днем, крок за кроком.»
+      </p>
+      <cite id="quote-cite">Володимир & Аліна</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROGRAM ══════════ -->
+<section class="bg-white">
+  <svg class="leaf-br" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 260 C40 200 80 175 100 120 C120 65 100 30 130 5" stroke="#1e3d30" stroke-width="1.5" fill="none"/>
+    <ellipse cx="95" cy="135" rx="38" ry="22" transform="rotate(-20 95 135)" fill="#1e3d30"/>
+    <ellipse cx="115" cy="80" rx="30" ry="18" transform="rotate(25 115 80)" fill="#1e3d30"/>
+    <path d="M200 240 C220 190 260 170 280 120" stroke="#1e3d30" stroke-width="1.3" fill="none"/>
+    <ellipse cx="260" cy="152" rx="34" ry="19" transform="rotate(15 260 152)" fill="#1e3d30"/>
+    <ellipse cx="235" cy="200" rx="28" ry="16" transform="rotate(-12 235 200)" fill="#1e3d30"/>
+  </svg>
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Програма дня" data-pl="Program dnia">Програма дня</span>
+    <h2 class="section-title reveal" data-uk="Як пройде наш <em>особливий день</em>" data-pl="Jak minie nasz <em>wyjątkowy dzień</em>">Як пройде наш <em>особливий день</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <div class="timeline reveal reveal-delay-1">
+      <div class="tl-item">
+        <span class="tl-time">16:00</span>
+        <div class="tl-title" data-uk="Збір гостей 🌿" data-pl="Przyjęcie gości 🌿">Збір гостей 🌿</div>
+        <div class="tl-desc" data-uk="Вітальні напої та знайомство у затишній атмосфері Dworek Jeleński" data-pl="Napoje powitalne i spotkanie w przytulnej atmosferze Dworku Jeleńskiego">Вітальні напої та знайомство у затишній атмосфері Dworek Jeleński</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">16:30</span>
+        <div class="tl-title" data-uk="Церемонія одруження 💍" data-pl="Ceremonia ślubna 💍">Церемонія одруження 💍</div>
+        <div class="tl-desc" data-uk="Урочиста церемонія з'єднання двох сердець" data-pl="Uroczysta ceremonia połączenia dwóch serc">Урочиста церемонія з'єднання двох сердець</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">17:00</span>
+        <div class="tl-title" data-uk="Банкет 🥂" data-pl="Bankiet 🥂">Банкет 🥂</div>
+        <div class="tl-desc" data-uk="Святкова вечеря, перші тости та смачні страви від шефа" data-pl="Uroczysta kolacja, pierwsze toasty i pyszne potrawy">Святкова вечеря, перші тости та смачні страви від шефа</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">18:00</span>
+        <div class="tl-title" data-uk="Танці 💃🕺" data-pl="Taniec 💃🕺">Танці 💃🕺</div>
+        <div class="tl-desc" data-uk="Діджей, танцювальна музика та веселощі для всіх!" data-pl="DJ, muzyka taneczna i zabawa dla wszystkich!">Діджей, танцювальна музика та веселощі для всіх!</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">20:00</span>
+        <div class="tl-title" data-uk="Весільний торт 🎂" data-pl="Tort weselny 🎂">Весільний торт 🎂</div>
+        <div class="tl-desc" data-uk="Урочисте розрізання торта — найсолодший момент вечора" data-pl="Uroczyste krojenie tortu — najsłodszy moment wieczoru">Урочисте розрізання торта — найсолодший момент вечора</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">21:30</span>
+        <div class="tl-title" data-uk="Феєрверк ✨" data-pl="Fajerwerki ✨">Феєрверк ✨</div>
+        <div class="tl-desc" data-uk="Яскраве шоу під зоряним серпневим небом" data-pl="Spektakularne show pod sierpniowym niebem">Яскраве шоу під зоряним серпневим небом</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">00:00</span>
+        <div class="tl-title" data-uk="Закінчення банкету 🌙" data-pl="Zakończenie bankietu 🌙">Закінчення банкету 🌙</div>
+        <div class="tl-desc" data-uk="Дякуємо, що були поруч — до нових зустрічей!" data-pl="Dziękujemy, że byliście z nami — do następnego razu!">Дякуємо, що були поруч — до нових зустрічей!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DRESSCODE ══════════ -->
+<section class="bg-light">
+  <svg class="leaf-tl" viewBox="0 0 240 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 280 C20 220 5 185 22 130 C39 75 90 65 72 20" stroke="#1e3d30" stroke-width="1.6" fill="none"/>
+    <ellipse cx="25" cy="148" rx="32" ry="18" transform="rotate(-22 25 148)" fill="#1e3d30"/>
+    <ellipse cx="48" cy="222" rx="36" ry="21" transform="rotate(18 48 222)" fill="#1e3d30"/>
+    <path d="M130 60 C150 35 145 10 165 0" stroke="#b8924a" stroke-width="1.3" fill="none"/>
+    <circle cx="127" cy="55" r="7" fill="#b8924a" opacity="0.7"/>
+    <circle cx="140" cy="33" r="5" fill="#b8924a" opacity="0.6"/>
+    <circle cx="162" cy="8" r="4" fill="#b8924a" opacity="0.5"/>
+  </svg>
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Дрес-код" data-pl="Dress code">Дрес-код</span>
+    <h2 class="section-title reveal" data-uk="Природна <em>елегантність</em>" data-pl="Naturalna <em>elegancja</em>">Природна <em>елегантність</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <p class="dresscode-text reveal reveal-delay-1"
+      data-uk="Наше весілля — у дусі живої природи та тепла літнього дня. Просимо одягнутися у кольори лісу та саду: відтінки зелені, бежевого, коричневого, ніжний рожевий, жовтий, блакитний — усе, що нагадує про природу та радість."
+      data-pl="Nasze wesele jest w duchu natury i letniego ciepła. Prosimy o stroje w kolorach lasu i ogrodu: odcienie zieleni, beżowego, brązowego, delikatny róż, żółty, błękit — wszystko, co przypomina przyrodę i radość.">
+      Наше весілля — у дусі живої природи та тепла літнього дня. Просимо одягнутися у кольори лісу та саду: відтінки зелені, бежевого, коричневого, ніжний рожевий, жовтий, блакитний — усе, що нагадує про природу та радість.
+    </p>
+    <div class="dresscode-note reveal reveal-delay-2"
+      data-uk="🚫 Прохання не приходити у білому або чорному вбранні"
+      data-pl="🚫 Prosimy nie przychodzić w białych ani czarnych strojach">
+      🚫 Прохання не приходити у білому або чорному вбранні
+    </div>
+    <div class="palette reveal reveal-delay-3">
+      <div class="swatch"><div class="swatch-circle" style="background:#1e3d30;"></div><span class="swatch-name" data-uk="Смарагд" data-pl="Szmaragd">Смарагд</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#a8c5a8;"></div><span class="swatch-name" data-uk="М'ята" data-pl="Mięta">М'ята</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#6b4226;"></div><span class="swatch-name" data-uk="Коричневий" data-pl="Brązowy">Коричневий</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#e8dfc8;"></div><span class="swatch-name" data-uk="Беж" data-pl="Beż">Беж</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#f5e87a;"></div><span class="swatch-name" data-uk="Жовтий" data-pl="Żółty">Жовтий</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#f0b8c8;"></div><span class="swatch-name" data-uk="Рожевий" data-pl="Różowy">Рожевий</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#b8d8f0;"></div><span class="swatch-name" data-uk="Блакитний" data-pl="Błękitny">Блакитний</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#d4b896;"></div><span class="swatch-name" data-uk="Пісок" data-pl="Piasek">Пісок</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GIFTS ══════════ -->
+<section class="bg-white">
+  <svg class="leaf-l" viewBox="0 0 260 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 480 C40 410 15 370 35 290 C55 210 115 195 95 120 C75 45 25 30 45 5" stroke="#1e3d30" stroke-width="1.6" fill="none"/>
+    <ellipse cx="42" cy="130" rx="34" ry="20" transform="rotate(-28 42 130)" fill="#1e3d30"/>
+    <ellipse cx="65" cy="225" rx="40" ry="23" transform="rotate(20 65 225)" fill="#1e3d30"/>
+    <ellipse cx="38" cy="315" rx="30" ry="18" transform="rotate(-15 38 315)" fill="#1e3d30"/>
+  </svg>
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Подарунки та побажання" data-pl="Prezenty i życzenia">Подарунки та побажання</span>
+    <h2 class="section-title reveal" data-uk="З любов'ю <em>від вас</em>" data-pl="Z miłością <em>od Was</em>">З любов'ю <em>від вас</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <div class="gifts-card reveal reveal-delay-1">
+      <span class="gifts-icon">🕊️</span>
+      <p class="gifts-text"
+        data-uk="Ми не хочемо обтяжувати вас вибором подарунка, тому будемо дуже раді вкладу в бюджет нашої молодої сім'ї."
+        data-pl="Nie chcemy obciążać Was wyborem prezentu, dlatego będziemy bardzo wdzięczni za wkład w budżet naszej młodej rodziny.">
+        Ми не хочемо обтяжувати вас вибором подарунка, тому будемо дуже раді вкладу в бюджет нашої молодої сім'ї.
+      </p>
+      <div class="gifts-note"
+        data-uk="🍾 Будемо вдячні, якщо ви утримаєтесь від пишних букетів і замените їх пляшечкою міцного напою"
+        data-pl="🍾 Będziemy wdzięczni, jeśli powstrzymacie się od okazałych bukietów i zastąpicie je butelką dobrego trunku">
+        🍾 Будемо вдячні, якщо ви утримаєтесь від пишних букетів і замените їх пляшечкою міцного напою
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MAP ══════════ -->
+<section class="bg-white">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Як дістатися" data-pl="Jak dojechać">Як дістатися</span>
+    <h2 class="section-title reveal" data-uk="Місце <em>проведення</em>" data-pl="Miejsce <em>uroczystości</em>">Місце <em>проведення</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <div class="map-address reveal reveal-delay-1">
+      <strong>Dworek Jeleński</strong>
+      <span>Kędzierzyn-Koźle, Польща</span>
+    </div>
+    <div class="map-frame reveal reveal-delay-2">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2538!2d18.2244!3d50.3497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471136c0e0000001%3A0x1!2sDworek%20Jele%C5%84ski!5e0!3m2!1suk!2sua!4v1700000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Dworek Jeleński">
+      </iframe>
+    </div>
+    <div style="text-align:center; margin-top:18px;">
+      <a href="https://maps.app.goo.gl/vtSbYaX4XGYuxoP48" target="_blank"
+        style="font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--green-light); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px; font-style:italic;"
+        data-uk="🗺 Відкрити у Google Maps" data-pl="🗺 Otwórz w Google Maps">
+        🗺 Відкрити у Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RSVP ══════════ -->
+<section class="bg-light">
+  <svg class="leaf-r" viewBox="0 0 240 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M55 420 C35 355 10 315 30 240 C50 165 110 150 90 80 C70 10 20 0 40 0" stroke="#1e3d30" stroke-width="1.6" fill="none"/>
+    <ellipse cx="40" cy="112" rx="32" ry="19" transform="rotate(25 40 112)" fill="#1e3d30"/>
+    <ellipse cx="60" cy="215" rx="38" ry="22" transform="rotate(-18 60 215)" fill="#1e3d30"/>
+    <ellipse cx="35" cy="298" rx="28" ry="17" transform="rotate(12 35 298)" fill="#1e3d30"/>
+    <ellipse cx="52" cy="372" rx="22" ry="13" transform="rotate(-8 52 372)" fill="#1e3d30"/>
+  </svg>
+  <div class="section-inner">
+    <span class="section-tag reveal" data-uk="Підтвердження" data-pl="Potwierdzenie">Підтвердження</span>
+    <h2 class="section-title reveal" data-uk="Чи будете ви <em>з нами?</em>" data-pl="Czy będziecie <em>z nami?</em>">Чи будете ви <em>з нами?</em></h2>
+    <div class="leaf-divider reveal">✦ ✦ ✦</div>
+    <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--text-mid);margin-bottom:38px;font-weight:400;line-height:1.6;" class="reveal reveal-delay-1"
+      data-uk="Будь ласка, підтвердіть свою присутність до <strong>15 липня 2026</strong>"
+      data-pl="Prosimy o potwierdzenie obecności do <strong>15 lipca 2026</strong>">
+      Будь ласка, підтвердіть свою присутність до <strong>15 липня 2026</strong>
+    </p>
+
+    <div class="rsvp-form reveal reveal-delay-2" id="rsvp-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label data-uk="Ім'я" data-pl="Imię">Ім'я</label>
+          <input type="text" id="fname" placeholder="Ваше ім'я">
+        </div>
+        <div class="form-group">
+          <label data-uk="Прізвище" data-pl="Nazwisko">Прізвище</label>
+          <input type="text" id="lname" placeholder="Ваше прізвище">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label data-uk="Чи будете присутні?" data-pl="Czy będziecie obecni?">Чи будете присутні?</label>
+        <div class="attend-options">
+          <button class="attend-btn" id="btn-yes" onclick="selectAttend('yes')"
+            data-uk="✓ Так, буду!" data-pl="✓ Tak, będę!">✓ Так, буду!</button>
+          <button class="attend-btn" id="btn-maybe" onclick="selectAttend('maybe')"
+            data-uk="◌ Можливо, дам знати пізніше" data-pl="◌ Możliwe, dam znać później">◌ Можливо, дам знати пізніше</button>
+          <button class="attend-btn" id="btn-no" onclick="selectAttend('no')"
+            data-uk="✗ На жаль, ні" data-pl="✗ Niestety nie">✗ На жаль, ні</button>
+        </div>
+      </div>
+
+      <div class="form-group" id="guests-group" style="display:none;">
+        <label data-uk="Кількість гостей (включно з вами)" data-pl="Liczba gości (wliczając Ciebie)">Кількість гостей (включно з вами)</label>
+        <input type="number" id="guests" min="1" max="10" value="1">
+      </div>
+
+      <div class="form-group">
+        <label data-uk="Переваги по алкоголю" data-pl="Preferencje alkoholowe">Переваги по алкоголю</label>
+        <div class="alcohol-options">
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="wine-red" data-uk="🍷 Червоне вино" data-pl="🍷 Wino czerwone">🍷 Червоне вино</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="wine-white" data-uk="🥂 Біле вино" data-pl="🥂 Wino białe">🥂 Біле вино</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="beer" data-uk="🍺 Пиво" data-pl="🍺 Piwo">🍺 Пиво</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="champagne" data-uk="✨ Шампанське" data-pl="✨ Szampan">✨ Шампанське</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="aperol" data-uk="🍊 Апероль Шпріц" data-pl="🍊 Aperol Spritz">🍊 Апероль Шпріц</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="whisky" data-uk="🥃 Віскі" data-pl="🥃 Whisky">🥃 Віскі</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="vodka" data-uk="🫙 Горілка" data-pl="🫙 Wódka">🫙 Горілка</span>
+          <span class="alc-chip" onclick="toggleAlc(this)" data-val="none" data-uk="🌿 Без алкоголю" data-pl="🌿 Bez alkoholu">🌿 Без алкоголю</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label data-uk="Побажання молодим 💚" data-pl="Życzenia dla pary młodej 💚">Побажання молодим 💚</label>
+        <textarea id="wishes"
+          data-uk-placeholder="Напишіть теплі слова для Володимира та Аліни..."
+          data-pl-placeholder="Napisz ciepłe słowa dla Volodymyra i Aliny..."
+          placeholder="Напишіть теплі слова для Володимира та Аліни..."></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="submitRSVP()"
+        data-uk="Надіслати відповідь" data-pl="Wyślij odpowiedź">Надіслати відповідь</button>
+      <div class="form-status" id="form-status"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <svg class="footer-bot-l" viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 250 C25 195 5 165 20 110 C35 55 90 45 70 10" stroke="white" stroke-width="1.5" fill="none"/>
+    <ellipse cx="22" cy="125" rx="32" ry="18" transform="rotate(-22 22 125)" fill="white"/>
+    <ellipse cx="45" cy="195" rx="36" ry="21" transform="rotate(16 45 195)" fill="white"/>
+    <ellipse cx="18" cy="58" rx="24" ry="14" transform="rotate(-12 18 58)" fill="white"/>
+    <path d="M150 200 C165 170 185 155 200 125" stroke="white" stroke-width="1.2" fill="none"/>
+    <ellipse cx="185" cy="145" rx="28" ry="16" transform="rotate(20 185 145)" fill="white"/>
+  </svg>
+  <svg class="footer-bot-r" viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 230 C25 175 5 145 20 95 C35 45 90 35 70 5" stroke="white" stroke-width="1.5" fill="none"/>
+    <ellipse cx="22" cy="108" rx="30" ry="17" transform="rotate(-20 22 108)" fill="white"/>
+    <ellipse cx="44" cy="175" rx="34" ry="20" transform="rotate(15 44 175)" fill="white"/>
+  </svg>
+  <span class="footer-names" id="footer-names">Володимир & Аліна</span>
+  <p>1 серпня 2026 · Dworek Jeleński, Kędzierzyn</p>
+</footer>
+
+<script>
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const target = new Date('2026-08-01T16:00:00');
+  const diff = target - new Date();
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML = '<p style="font-family:Cormorant Garamond,serif;font-style:italic;color:var(--green);font-size:26px;">🌿 Сьогодні наш день!</p>';
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── LANG ──
+let currentLang = 'uk';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-uk').classList.toggle('active', lang==='uk');
+  document.getElementById('btn-pl').classList.toggle('active', lang==='pl');
+  document.getElementById('hero-uk').style.display = lang==='uk' ? 'block' : 'none';
+  document.getElementById('hero-pl').style.display = lang==='pl' ? 'block' : 'none';
+  document.getElementById('footer-names').textContent = lang==='uk' ? 'Володимир & Аліна' : 'Volodymyr & Alina';
+  document.getElementById('quote-cite').textContent = lang==='uk' ? 'Володимир & Аліна' : 'Volodymyr & Alina';
+  // calendar dow labels
+  document.querySelectorAll('.cal-dow, .cal-header').forEach(el => {
+    const v = el.getAttribute('data-'+lang);
+    if (v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-uk]').forEach(el => {
+    const v = el.getAttribute('data-'+lang);
+    if (v) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-uk-placeholder]').forEach(el => {
+    const v = el.getAttribute('data-'+lang+'-placeholder');
+    if (v) el.placeholder = v;
+  });
+}
+
+// ── RSVP ──
+let attendance = null;
+function selectAttend(val) {
+  attendance = val;
+  ['btn-yes','btn-maybe','btn-no'].forEach(id => document.getElementById(id).classList.remove('selected'));
+  document.getElementById({yes:'btn-yes',maybe:'btn-maybe',no:'btn-no'}[val]).classList.add('selected');
+  document.getElementById('guests-group').style.display = val==='yes' ? 'flex' : 'none';
+}
+
+function toggleAlc(el) { el.classList.toggle('selected'); }
+
+async function submitRSVP() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const guests = document.getElementById('guests').value;
+  const wishes = document.getElementById('wishes').value.trim();
+  const status = document.getElementById('form-status');
+
+  if (!fname || !lname) {
+    status.className='form-status error';
+    status.textContent = currentLang==='uk' ? 'Будь ласка, введіть ваше ім\'я та прізвище.' : 'Proszę podać imię i nazwisko.';
+    return;
+  }
+  if (!attendance) {
+    status.className='form-status error';
+    status.textContent = currentLang==='uk' ? 'Будь ласка, вкажіть вашу відповідь.' : 'Proszę zaznaczyć odpowiedź.';
+    return;
+  }
+
+  const alcNames = {'wine-red':'Червоне вино','wine-white':'Біле вино','beer':'Пиво','champagne':'Шампанське','aperol':'Апероль Шпріц','whisky':'Віскі','vodka':'Горілка','none':'Без алкоголю'};
+  const alc = [...document.querySelectorAll('.alc-chip.selected')].map(c=>alcNames[c.getAttribute('data-val')]||c.getAttribute('data-val')).join(', ');
+  const attTxt = {yes:'✅ Так, буду!', maybe:'🤔 Можливо, дам знати пізніше', no:'❌ На жаль, не буду'};
+  const gLine = attendance==='yes' ? `\n👥 Кількість гостей: ${guests}` : '';
+  const text = `🌿 Нова відповідь на запрошення!\n\n👤 ${fname} ${lname}\n${attTxt[attendance]}${gLine}\n🍷 Алкоголь: ${alc||'—'}\n💬 Побажання: ${wishes||'—'}`;
+
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent='…'; btn.disabled=true;
+
+  try {
+    const res = await fetch('https://api.telegram.org/bot8580655242:AAGBwGWbYl3HaRYSqYPLXuWQ-tWWuB3zcCk/sendMessage', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({chat_id:'342182584', text})
+    });
+    const data = await res.json();
+    if (data.ok) {
+      status.className='form-status success';
+      status.textContent = currentLang==='uk' ? '🌿 Дякуємо! Ми отримали вашу відповідь і чекаємо вас!' : '🌿 Dziękujemy! Otrzymaliśmy Waszą odpowiedź!';
+      document.getElementById('rsvp-form').querySelectorAll('input,textarea').forEach(el=>el.value='');
+      attendance=null;
+      ['btn-yes','btn-maybe','btn-no'].forEach(id=>document.getElementById(id).classList.remove('selected'));
+      document.querySelectorAll('.alc-chip').forEach(c=>c.classList.remove('selected'));
+      document.getElementById('guests-group').style.display='none';
+    } else { throw new Error(); }
+  } catch(e) {
+    status.className='form-status error';
+    status.textContent = currentLang==='uk' ? 'Щось пішло не так. Спробуйте ще раз.' : 'Coś poszło nie tak. Spróbuj ponownie.';
+  }
+  btn.textContent = currentLang==='uk' ? 'Надіслати відповідь' : 'Wyślij odpowiedź';
+  btn.disabled=false;
+}
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
